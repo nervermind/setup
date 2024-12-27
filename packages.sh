@@ -10,7 +10,7 @@ brew_formulae=(
     mas
     node
     powerlevel10k
-    #stow
+    stow
     zsh-autosuggestions
     zsh-history-substring-search
     zsh-syntax-highlighting

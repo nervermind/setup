@@ -1,0 +1,14 @@
+Host github.com gitlab.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519_git
+
+Host nasberry
+  HostName nasberry.local
+  Port 4422
+  User master
+
+Host masterberry
+  HostName masterberry.local
+  Port 4422
+  User master

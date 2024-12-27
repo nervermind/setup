@@ -15,7 +15,7 @@ Dieses Repository hilft dabei, eine Entwicklungsumgebung auf einem **MacOS**-Rec
 
 Führen Sie das `dotfiles`-Skript aus:
 ```sh
-curl -sO https://raw.githubusercontent.com/protiumx/.dotfiles/main/dotfiles
+curl -sO https://raw.githubusercontent.com/nervermind/setup/main/install
 ```
 
 ## Testing Stow
