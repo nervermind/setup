@@ -8,7 +8,7 @@ set -o pipefail
 . scripts/utils.sh
 . scripts/brew.sh
 . scripts/cli.sh
-#. scripts/config.sh
+. scripts/config.sh
 . scripts/osx.sh
 ### ------
 
@@ -86,15 +86,19 @@ main() {
 	#wait_input
 	setup_osx
 	success "Finished configuring MacOS defaults. NOTE: A restart is needed"
-	: '
 	stow_dotfiles
 	success "Finished stowing dotfiles"
-    '
 
 	info "################################################################################"
 	info "Creating development folders"
 	info "################################################################################"
-	#mkdir -p ~/dev
+	if [ ! -d ~/dev ]; then
+    	mkdir -p ~/dev
+    	success "Created ~/dev directory"
+	else
+    	info "~/dev directory already exists"
+	fi
+
     : '
 	info "################################################################################"
 	info "SSH Key"

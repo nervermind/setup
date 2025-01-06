@@ -3,6 +3,7 @@
 set -o errexit
 
 #REPO_URL=https://github.com/protiumx/.dotfiles.git
+REPO_URL=https://github.com/nervermind/setup.git
 DEFAULT_REPO_PATH="$HOME/.dotfiles"
 
 reset_color=$(tput sgr 0)
@@ -56,16 +57,16 @@ if which git >/dev/null 2>&1 || hash git &>/dev/null; then
 else
     echo "Git is not installed."
     info "Installing Git"
-    #brew install git
+    brew install git
 fi
 
 info "Cloning setup repo from $REPO_URL"
 read -p "Change install path or enter (default is '$DEFAULT_REPO_PATH'): " user_input
 REPO_PATH=${user_input:-$DEFAULT_REPO_PATH} # Use the default value if no input is provided
 echo "You selected: $REPO_PATH"
-#git clone "$REPO_URL" "$REPO_PATH"
+git clone "$REPO_URL" "$REPO_PATH"
 
 info "Change path to $REPO_PATH"
-#cd "$REPO_PATH" >/dev/null
+cd "$REPO_PATH" >/dev/null
 
 ./scripts/install.sh
