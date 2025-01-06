@@ -32,3 +32,4 @@ stow -nSv vim
 
 - [ ] Enable SSH
 - [ ] Add more .dotfiles to stow
+- [ ] add ssh at beginning
