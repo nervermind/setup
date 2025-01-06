@@ -69,4 +69,8 @@ git clone "$REPO_URL" "$REPO_PATH"
 info "Change path to $REPO_PATH"
 cd "$REPO_PATH" >/dev/null
 
+# Make the install.sh script executable
+chmod +x ./scripts/install.sh
+
+# Execute the install.sh script
 /bin/bash -c "./scripts/install.sh"
