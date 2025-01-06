@@ -25,3 +25,8 @@ Simulate `stow` links
 ```sh
 stow -nSv vim
 ```
+
+## Todo's
+
+- [ ] Enable SSH
+- [ ] Add more .dotfiles to stow
