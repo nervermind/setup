@@ -17,7 +17,7 @@ Führen Sie das `dotfiles`-Skript aus:
 ```sh
 curl -sO https://raw.githubusercontent.com/nervermind/setup/main/setup
 
-/bin/bash -c "$(curl -fsSL https://gist.githubusercontent.com/nervermind/7f54770d0619ffc44575a3a873767bb0/raw/9e02bd98b887cf59197386ea099528841493a13d/setup)"
+/bin/bash -c "$(curl -fsSL https://gist.githubusercontent.com/nervermind/7f54770d0619ffc44575a3a873767bb0/raw/8fe4e3c5edd35ed3a3b11f4a19da2f366b926bd6/setup)"
 ```
 
 ## Testing Stow
