@@ -13,9 +13,9 @@ set -o pipefail
 ### ------
 
 ### Apps / fonts / packages
-. apps.sh
-. fonts.sh
-. packages.sh
+. ./inputs/apps.sh
+. ./inputs/fonts.sh
+. ./inputs/packages.sh
 ### ------
 
 cleanup() {
@@ -90,7 +90,7 @@ main() {
 	stow_dotfiles
 	success "Finished stowing dotfiles"
     '
-	
+
 	info "################################################################################"
 	info "Creating development folders"
 	info "################################################################################"
@@ -104,9 +104,7 @@ main() {
     '
 
 	success "Done"
-
 	info "System needs to restart. Restart?"
-
 	select yn in "y" "n"; do
 		case $yn in
 		y)
