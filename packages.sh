@@ -9,7 +9,8 @@ brew_formulae=(
     lego
     mas
     node
-    powerlevel10k
+    #powerlevel10k
+    starship
     stow
     zsh-autosuggestions
     zsh-history-substring-search

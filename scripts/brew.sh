@@ -32,3 +32,15 @@ install_brew_casks() {
 		fi
 	done
 }
+
+install_brew_fonts() {
+	local fonts=$*
+	for font in $fonts; do
+		if brew list | grep "$font" >/dev/null; then
+			warn "Cask $font is already installed"
+		else
+			info "Installing cask < $font >"
+			brew install "$font"
+		fi
+	done
+}
