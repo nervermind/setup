@@ -1,0 +1,99 @@
+# Old Config
+# export PS1='%F{cyan}%D%{/%}%*%f %{-%} %F{red}%n%f@%F{green}%m%f %0~ %# '
+# export CLICOLOR=1
+
+# Random Alias
+alias reload="exec zsh -l"
+
+# GIT
+alias g="git"
+alias gs="git status"
+alias gf="git fetch"
+alias gd="git diff"
+alias gb="git branch"
+alias gm="git checkout master"
+alias gfs="git fetch && git status"
+alias git='LANG=en_GB git'
+
+# GIT Function
+function parse_git_branch() {
+    local branch_name="$(git branch 2>/dev/null | sed -n -e 's/^\* \(.*\)/\1/p')"
+    if [ $? -ne 0 ]; then
+        return
+    fi
+    if [[ "$branch_name" == "main" || "$branch_name" == "master" ]]; then
+        echo "%F{red}${branch_name}%{$COLOR_GIT%}"
+    elif [[ "$branch_name" == *"bug"* ]]; then
+        echo "%F{orange}${branch_name}%{$COLOR_GIT%}"
+    else
+        echo "%F{COLOR_DEF}${branch_name}%{$COLOR_GIT%}"
+    fi
+}
+
+function count_git_unstaged() {
+    local value="$(git ls-files --exclude-standard --others | wc -l | tr -d ' ')"
+    if [ $? -ne 0 ]; then
+        return
+    else
+        echo "$value"
+    fi
+}
+
+function count_git_staged() {
+    local value="$(git diff --name-only --cached | wc -l | tr -d ' ')"
+    if [ $? -ne 0 ]; then
+        return
+    else
+        echo "$value"
+    fi
+}
+
+function count_git_ahead() {
+    local value="$(git rev-list --count HEAD@{upstream}..HEAD 2>/dev/null | tr -d ' ')"
+    if [ $? -ne 0 ]; then
+        return
+    else
+        echo "$value"
+    fi
+}
+
+function count_git_behind() {
+    local value="$(git rev-list --count HEAD..HEAD@{upstream} 2>/dev/null | tr -d ' ')"
+    if [ $? -ne 0 ]; then
+        return
+    else
+        echo "$value"
+    fi
+}
+
+# PROMPT STYLE
+COLOR_DEF=$'%f'
+COLOR_DIR=$'%F{243}'
+COLOR_USR=$'%F{197}'
+COLOR_GIT=$'%F{39}'
+COLOR_HOST=$'%F{green}'
+COLOR_TIME=$'%F{cyan}'
+
+function git_prompt() {
+    if [ -n "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
+        echo "($(parse_git_branch) ↑$(count_git_ahead)↓$(count_git_behind) ✚$(count_git_unstaged)●$(count_git_staged))"
+    fi
+}
+
+setopt PROMPT_SUBST
+export PROMPT='${COLOR_TIME}%D %* ${COLOR_USR}%n${COLOR_DEF}@${COLOR_HOST}%m${COLOR_DEF} in ${COLOR_DIR}%~ ${COLOR_GIT}$(git_prompt)${COLOR_DEF} $ '
+#export PROMPT='${COLOR_TIME}%D %* ${COLOR_USR}%n${COLOR_DEF}@${COLOR_HOST}%m${COLOR_DEF} in ${COLOR_DIR}%~ ${COLOR_GIT}${vcs_info_msg_0_}${COLOR_DEF} $ '
+
+# Load version control information
+#autoload -Uz vcs_info
+
+# Format the vcs_info_msg_0_ variable
+#zstyle ':vcs_info:git:*' enable git
+#zstyle ':vcs_info:git:*' get-revision true
+#zstyle ':vcs_info:git:*' check-for-changes true
+#zstyle ':vcs_info:git:*' formats '(%b - %s - %u%c)'
+#zstyle ':vcs_info:git:*' branchformats '%b'
+#zstyle ':vcs_info:git:*' unstagedstr '*'
+#zstyle ':vcs_info:*' enable
+
+#precmd() { vcs_info }

@@ -20,13 +20,14 @@ brew_casks=(
 	vlc
     #wave
     whatsapp
-    whisky
+    #whisky
 )
 
 mas_apps=(
     "545519333"   #Prime Video
     "571213070"   #DaVinci Resolve
     "1440147259"  #AdGuard for Safari
+    #"948660805"   #Ausweis App Bund
 )
 
 install_macos_apps() {
