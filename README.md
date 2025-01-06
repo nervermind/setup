@@ -15,7 +15,9 @@ Dieses Repository hilft dabei, eine Entwicklungsumgebung auf einem **MacOS**-Rec
 
 Führen Sie das `dotfiles`-Skript aus:
 ```sh
-curl -sO https://raw.githubusercontent.com/nervermind/setup/main/install
+curl -sO https://raw.githubusercontent.com/nervermind/setup/main/setup
+
+/bin/bash -c "$(curl -fsSL https://gist.githubusercontent.com/nervermind/7f54770d0619ffc44575a3a873767bb0/raw/9e02bd98b887cf59197386ea099528841493a13d/setup)"
 ```
 
 ## Testing Stow
