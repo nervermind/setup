@@ -7,7 +7,7 @@ brew_formulae=(
     d2
     #kubernetes-cli
     lego
-    mas
+    #mas
     node
     #powerlevel10k
     starship
@@ -18,7 +18,6 @@ brew_formulae=(
 )
 
 install_packages() {
-
     if [[ ${#brew_taps[@]} -gt 0 ]]; then
         info "Configuring taps"
         apply_brew_taps "${brew_taps[@]}"

@@ -40,12 +40,17 @@ install_macos_apps() {
 }
 
 install_masApps() {
-    if [[ ${#mas_apps[@]} -gt 0 ]]; then
-        info "Installing App Store apps..."
-	    for app in "${mas_apps[@]}"; do
-		    mas install "$app"
-	    done
+    if version_ge "$OS_VERSION" "14.2"; then
+    # Install mas apps
+        if [[ ${#mas_apps[@]} -gt 0 ]]; then
+            info "Installing App Store apps..."
+            for app in "${mas_apps[@]}"; do
+                mas install "$app"
+            done
+        else
+            info "No App Store apps to install."
+        fi
     else
-        info "No App Store apps to install."
+        info "Skipping mas apps installation. macOS version is less than 14.2"
     fi
 }

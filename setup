@@ -2,7 +2,6 @@
 
 set -o errexit
 
-#REPO_URL=https://github.com/protiumx/.dotfiles.git
 REPO_URL=https://github.com/nervermind/setup.git
 DEFAULT_REPO_PATH="$HOME/.dotfiles"
 
@@ -22,6 +21,44 @@ err() {
 
 warn() {
 	printf "%s[*] %s%s\n" "$(tput setaf 3)" "$1" "$reset_color"
+}
+
+check_system_info() {
+    # Check OS and OS version
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        OS="Linux"
+        OS_VERSION=$(cat /etc/os-release | grep VERSION= | cut -d '"' -f 2)
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        OS="macOS"
+        OS_VERSION=$(sw_vers -productVersion)
+    elif [[ "$OSTYPE" == "win32" ]]; then
+        OS="Windows"
+        OS_VERSION="N/A"
+    else
+        OS="Unknown"
+        OS_VERSION="N/A"
+    fi
+
+    # Check terminal
+    if [[ "$SHELL" == *"bash"* ]]; then
+        TERMINAL="bash"
+    elif [[ "$SHELL" == *"zsh"* ]]; then
+        TERMINAL="zsh"
+    elif [[ "$SHELL" == *"powershell"* ]]; then
+        TERMINAL="powershell"
+    else
+        TERMINAL="unknown"
+    fi
+
+    echo "Operating System: $OS"
+    echo "OS Version: $OS_VERSION"
+    echo "Terminal: $TERMINAL"
+
+	# If OS is not macOS, exit script
+	if [[ "$OS" != "macOS" ]]; then
+		err "This script is only for macOS. Exiting..."
+		exit 1
+	fi
 }
 
 install_xcode() {
@@ -58,6 +95,8 @@ info "####### setup new machine #######"
 read -p "Press enter to start:"
 info "Bootstraping..."
 
+
+check_system_info
 install_xcode
 install_homebrew
 install_git

@@ -2,6 +2,8 @@
 
 Dieses Repository hilft dabei, eine Entwicklungsumgebung auf einem **MacOS**-Rechner einzurichten. Es enthält Skripte und Konfigurationsdateien, um alle benötigten Pakete und Anwendungen zu installieren, Konfigurationsdateien zu verwalten und bevorzugte MacOS-Einstellungen zu setzen.
 
+Original coming from: [https://medium.com/@protiumx/bash-gnu-stow-take-a-walk-while-your-new-macbook-is-being-set-up-351a6f2f9225]
+
 ## Funktionen
 
 - Installiert alle von mir verwendeten Pakete und Anwendungen
