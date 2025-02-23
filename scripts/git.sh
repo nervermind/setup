@@ -70,6 +70,7 @@ clone_tool_projects() {
   cd
 }
 
+# Run the functions if the --test flag is set
 if [ "$test" = true ]; then
   info "Testing Started"
   clone_dev_projects
