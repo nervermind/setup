@@ -18,19 +18,22 @@ clone_dev_projects() {
   cloned_count=0
   existed_count=0
 
-  for repo in "${dev_repos[@]}"; do
-    repo_name=$(basename "$repo" .git)
-    if [ -d "$repo_name" ]; then
-      warn "Repo $repo_name already exists"
-      ((existed_count++))
-    else
-      info clone "$repo"
-      ((cloned_count++))
-    fi
-  done
-
-  info "Cloned $cloned_count dev repos."
-  info "$existed_count dev repos already existed."
+  if [[ ${#dev_repos[@]} -gt 0 ]]; then
+    for repo in "${dev_repos[@]}"; do
+      repo_name=$(basename "$repo" .git)
+      if [ -d "$repo_name" ]; then
+        warn "Repo $repo_name already exists"
+        ((existed_count++))
+      else
+        info clone "$repo"
+        ((cloned_count++))
+      fi
+    done
+    info "Cloned $cloned_count dev repos."
+    info "$existed_count dev repos already existed."
+  else
+    warn "No dev repos to clone."
+  fi
 
   cd
 }
@@ -47,19 +50,22 @@ clone_tool_projects() {
   cloned_count=0
   existed_count=0
 
-  for repo in "${tool_repos[@]}"; do
-    repo_name=$(basename "$repo" .git)
-    if [ -d "$repo_name" ]; then
-      warn "Repo $repo_name already exists"
-      ((existed_count++))
-    else
-      git clone "$repo"
-      ((cloned_count++))
-    fi
-  done
-
-  info "Cloned $cloned_count dev repos."
-  info "$existed_count dev repos already existed."
+  if [[ ${#tool_repos[@]} -gt 0 ]]; then
+    for repo in "${tool_repos[@]}"; do
+      repo_name=$(basename "$repo" .git)
+      if [ -d "$repo_name" ]; then
+        warn "Repo $repo_name already exists"
+        ((existed_count++))
+      else
+        git clone "$repo"
+        ((cloned_count++))
+      fi
+    done
+    info "Cloned $cloned_count dev repos."
+    info "$existed_count dev repos already existed."
+  else
+    warn "No tool repos to clone."
+  fi
 
   cd
 }
