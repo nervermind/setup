@@ -29,11 +29,6 @@ wait_input() {
 	read -p "Press enter to continue: "
 }
 
-version_ge() {
-    # Returns 0 (true) if $1 >= $2, else 1 (false)
-    [ "$(printf '%s\n' "$2" "$1" | sort -V | head -n1)" = "$2" ]
-}
-
 main() {
 	info "Installing ..."
 
