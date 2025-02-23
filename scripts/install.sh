@@ -10,12 +10,14 @@ set -o pipefail
 . scripts/cli.sh
 . scripts/config.sh
 . scripts/osx.sh
+. scripts/git.sh
 ### ------
 
 ### Apps / fonts / packages
 . ./inputs/apps.sh
 . ./inputs/fonts.sh
 . ./inputs/packages.sh
+. ./inputs/repos.sh
 ### ------
 
 cleanup() {
@@ -95,16 +97,6 @@ main() {
 	stow_dotfiles
 	success "Finished stowing dotfiles"
 
-	info "################################################################################"
-	info "Creating development folders"
-	info "################################################################################"
-	if [ ! -d ~/dev ]; then
-    	mkdir -p ~/dev
-    	success "Created ~/dev directory"
-	else
-    	info "~/dev directory already exists"
-	fi
-
     : '
 	info "################################################################################"
 	info "SSH Key"
@@ -112,6 +104,20 @@ main() {
 	setup_github_ssh
 	success "Finished setting up SSH Key"
     '
+
+	info "################################################################################"
+	info "Cloning dev repositories"
+	info "################################################################################"
+	#wait_input
+	clone_dev_projects
+	success "Finished cloning dev repositories"
+
+	info "################################################################################"
+	info "Cloning tool repositories"
+	info "################################################################################"
+	#wait_input
+	clone_tool_projects
+  	success "Cloned all tool repos - follow readme.md install steps"
 
 	success "Done"
 	info "System needs to restart. Restart?"
