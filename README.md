@@ -35,3 +35,6 @@ stow -nSv vim
 - [ ] Enable SSH
 - [ ] Add more .dotfiles to stow
 - [ ] add ssh at beginning
+- [ ] add fonts function
+- [ ] add test functions
+- [ ] add dryrun funtions
