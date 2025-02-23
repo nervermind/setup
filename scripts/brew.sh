@@ -24,7 +24,7 @@ apply_brew_taps() {
 		fi
 	done
 	info "Applied $install_count taps."
-	info "Skipped $skipped_count taps."
+	warn "Skipped $skipped_count taps."
 }
 
 install_brew_formulae() {
@@ -46,7 +46,7 @@ install_brew_formulae() {
 		fi
 	done
 	info "Installed $install_count packages."
-	info "Skipped $skipped_count packages."
+	warn "Skipped $skipped_count packages."
 }
 
 install_brew_casks() {
@@ -68,7 +68,7 @@ install_brew_casks() {
 		fi
 	done
 	info "Installed $install_count casks."
-	info "Skipped $skipped_count casks."
+	warn "Skipped $skipped_count casks."
 }
 
 install_brew_fonts() {
@@ -90,7 +90,7 @@ install_brew_fonts() {
 		fi
 	done
 	info "Installed $install_count fonts."
-	info "Skipped $skipped_count fonts."
+	warn "Skipped $skipped_count fonts."
 }
 
 install_macos_apps() {
