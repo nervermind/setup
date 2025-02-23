@@ -3,7 +3,7 @@ if [[ " $* " == *" --test "* ]]; then
   . ./inputs/repos.sh
   . ./scripts/utils.sh 
   info "Test mode running"
-  test=true
+  TEST=true
 fi
 
 clone_dev_projects() {
@@ -71,7 +71,7 @@ clone_tool_projects() {
 }
 
 # Run the functions if the --test flag is set
-if [ "$test" = true ]; then
+if [ "$TEST" = true ]; then
   info "Testing Started"
   clone_dev_projects
   clone_tool_projects
