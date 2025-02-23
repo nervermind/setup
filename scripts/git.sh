@@ -1,7 +1,10 @@
-
-# For Dev Tests activate this lines and the one at the end of the file
-. ./inputs/repos.sh
-. ./scripts/utils.sh 
+# Check for the --test flag
+if [[ " $* " == *" --test "* ]]; then
+  . ./inputs/repos.sh
+  . ./scripts/utils.sh 
+  info "Test mode running"
+  test=true
+fi
 
 clone_dev_projects() {
   if [ ! -d ~/dev ]; then
@@ -61,6 +64,8 @@ clone_tool_projects() {
   cd
 }
 
-# Uncomment the following lines to test the functions
- clone_dev_projects
- clone_tool_projects
+if [ "$test" = true ]; then
+  info "Testing Started"
+  clone_dev_projects
+  clone_tool_projects
+fi 
