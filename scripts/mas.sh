@@ -13,7 +13,11 @@ install_masApps() {
         if [[ ${#mas_apps[@]} -gt 0 ]]; then
             info "Installing App Store apps..."
             for app in "${mas_apps[@]}"; do
-                mas install "$app"
+                if [ "$TEST" = true ]; then
+                    info "Test mode: Skipping installation of App Store app $app"
+                else
+                    mas install "$app"
+                fi
             done
         else
             info "No App Store apps to install."
@@ -22,7 +26,6 @@ install_masApps() {
         warn "Skipping mas apps installation. macOS version is less than 14.2"
     fi
 }
-
 
 # Run the functions if the --test flag is set
 if [ "$TEST" = true ]; then
