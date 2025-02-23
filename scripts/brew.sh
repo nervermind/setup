@@ -1,3 +1,11 @@
+# Check for the --test flag
+if [[ " $* " == *" --test "* ]]; then
+  . ./inputs/apps.sh
+  . ./scripts/utils.sh 
+  info "Test mode running"
+  test=true
+fi
+
 apply_brew_taps() {
 	local tap_packages=$*
 	for tap in $tap_packages; do
@@ -44,3 +52,25 @@ install_brew_fonts() {
 		fi
 	done
 }
+
+install_macos_apps() {
+    if [[ ${#brew_casks[@]} -gt 0 ]]; then
+        info "Installing brew casks..."
+	    install_brew_casks "${brew_casks[@]}"
+    else
+        info "No brew casks to install."
+    fi
+}
+
+install_fonts() {
+	info "Installing fonts..."
+	#brew tap homebrew/cask-fonts
+	install_brew_fonts "${fonts[@]}"
+}
+
+# Run the functions if the --test flag is set
+if [ "$test" = true ]; then
+  info "Testing Started"
+  install_macos_apps
+  install_fonts
+fi 
