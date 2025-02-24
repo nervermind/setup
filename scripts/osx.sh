@@ -1,3 +1,10 @@
+if [[ " $* " == *" --test "* ]]; then
+  . ./inputs/osx.sh
+  . ./scripts/utils.sh 
+  info "Test mode running"
+  TEST=true
+fi
+
 setup_osx() {
 	info "Configuring MacOS default settings"
 
@@ -11,7 +18,7 @@ setup_osx() {
 	defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
     # Show all extensions
-    defaults write "Apple Global Domain"  AppleShowAllExtensions -bool true  
+    defaults write "Apple Global Domain" AppleShowAllExtensions -bool true  
 
 	# Avoid creating .DS_Store files on network volumes
 	#defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
@@ -59,3 +66,28 @@ setup_osx() {
     #launchctl load "$HOME/Library/LaunchAgents/com.openssh.ssh-agent.plist"
     #launchctl enable "$HOME/Library/LaunchAgents/com.openssh.ssh-agent.plist"
 }
+
+setup_OSX_v2() {
+	if [[ ${#osx_defaults[@]} -gt 0 ]]; then
+		for item in "${osx_defaults[@]}"; do
+			name=$(echo "$item" | jq -r '.name')
+			command=$(echo "$item" | jq -r '.command')
+			type=$(echo "$item" | jq -r '.type')
+			value=$(echo "$item" | jq -r '.value')
+			info "defaults $command $name $type $value"
+			if [ "$TEST" = true ]; then
+				echo "skiped defaults $command $name $type $value"
+			else
+				defaults $command $name $type $value
+			fi
+		done
+	else
+		warn "No defaults to set"
+	fi
+}
+
+# Run the functions if the --test flag is set
+if [ "$TEST" = true ]; then
+  info "Testing Started"
+  setup_OSX_v2
+fi 
