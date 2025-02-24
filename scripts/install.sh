@@ -34,7 +34,7 @@ main() {
 
     # Prompt the user for input
     while true; do
-        read -p "Do you want install Homebrew Packages? (y/n): " user_input
+        read -p "Execute test mode? (y/n): " user_input
         # Validate the input
         case "$user_input" in
             y|Y|yes|YES)
@@ -52,6 +52,14 @@ main() {
         esac
     done
 	
+	: '
+	info "################################################################################"
+	info "SSH Key"
+	info "################################################################################"
+	setup_github_ssh
+	success "Finished setting up SSH Key"
+    '
+
 	info "################################################################################"
 	info "Oh-my-zsh"
 	info "################################################################################"
@@ -89,16 +97,8 @@ main() {
 	#wait_input
 	setup_osx
 	success "Finished configuring MacOS defaults. NOTE: A restart is needed"
-	stow_dotfiles
-	success "Finished stowing dotfiles"
-
-    : '
-	info "################################################################################"
-	info "SSH Key"
-	info "################################################################################"
-	setup_github_ssh
-	success "Finished setting up SSH Key"
-    '
+	#stow_dotfiles
+	#success "Finished stowing dotfiles"
 
 	info "################################################################################"
 	info "Cloning dev repositories"
