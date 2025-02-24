@@ -8,7 +8,7 @@ osx_defaults=(
     '{"name": "com.apple.dock tilesize", "command": "write", "type": "-float", "value": "41"}'
 )
 
-:'for item in "${osx_defaults[@]}"; do
+: 'for item in "${osx_defaults[@]}"; do
     name=$(echo "$item" | jq -r '.name')
     command=$(echo "$item" | jq -r '.command')
     type=$(echo "$item" | jq -r '.type')
